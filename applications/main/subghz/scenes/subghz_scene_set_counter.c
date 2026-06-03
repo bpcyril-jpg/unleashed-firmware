@@ -30,9 +30,9 @@ void subghz_scene_set_counter_on_enter(void* context) {
         byte_ptr = (uint8_t*)&subghz->gen_info->came_atomo.cnt;
         byte_count = sizeof(subghz->gen_info->came_atomo.cnt);
         break;
-    case GenKeeloqBFT:
-        byte_ptr = (uint8_t*)&subghz->gen_info->keeloq_bft.cnt;
-        byte_count = sizeof(subghz->gen_info->keeloq_bft.cnt);
+    case GenKeeloqSeed:
+        byte_ptr = (uint8_t*)&subghz->gen_info->keeloq_seed.cnt;
+        byte_count = sizeof(subghz->gen_info->keeloq_seed.cnt);
         break;
     case GenAlutechAt4n:
         byte_ptr = (uint8_t*)&subghz->gen_info->alutech_at_4n.cnt;
@@ -57,6 +57,10 @@ void subghz_scene_set_counter_on_enter(void* context) {
     case GenJarolift:
         byte_ptr = (uint8_t*)&subghz->gen_info->jarolift.cnt;
         byte_count = sizeof(subghz->gen_info->jarolift.cnt);
+        break;
+    case GenDitecGOL4:
+        byte_ptr = (uint8_t*)&subghz->gen_info->ditec_gol4.cnt;
+        byte_count = sizeof(subghz->gen_info->ditec_gol4.cnt);
         break;
     case GenNiceFlorS:
         byte_ptr = (uint8_t*)&subghz->gen_info->nice_flor_s.cnt;
@@ -119,8 +123,8 @@ bool subghz_scene_set_counter_on_event(void* context, SceneManagerEvent event) {
             case GenCameAtomo:
                 subghz->gen_info->came_atomo.cnt = __bswap16(subghz->gen_info->came_atomo.cnt);
                 break;
-            case GenKeeloqBFT:
-                subghz->gen_info->keeloq_bft.cnt = __bswap16(subghz->gen_info->keeloq_bft.cnt);
+            case GenKeeloqSeed:
+                subghz->gen_info->keeloq_seed.cnt = __bswap16(subghz->gen_info->keeloq_seed.cnt);
                 break;
             case GenAlutechAt4n:
                 subghz->gen_info->alutech_at_4n.cnt =
@@ -142,6 +146,9 @@ bool subghz_scene_set_counter_on_event(void* context, SceneManagerEvent event) {
             case GenJarolift:
                 subghz->gen_info->jarolift.cnt = __bswap16(subghz->gen_info->jarolift.cnt);
                 break;
+            case GenDitecGOL4:
+                subghz->gen_info->ditec_gol4.cnt = __bswap16(subghz->gen_info->ditec_gol4.cnt);
+                break;
             case GenNiceFlorS:
                 subghz->gen_info->nice_flor_s.cnt = __bswap16(subghz->gen_info->nice_flor_s.cnt);
                 break;
@@ -161,7 +168,7 @@ bool subghz_scene_set_counter_on_event(void* context, SceneManagerEvent event) {
 
             switch(subghz->gen_info->type) {
             case GenFaacSLH:
-            case GenKeeloqBFT:
+            case GenKeeloqSeed:
                 scene_manager_next_scene(subghz->scene_manager, SubGhzSceneSetSeed);
                 return true;
             case GenKeeloq:
@@ -235,6 +242,15 @@ bool subghz_scene_set_counter_on_event(void* context, SceneManagerEvent event) {
                     subghz->gen_info->jarolift.serial,
                     subghz->gen_info->jarolift.btn,
                     subghz->gen_info->jarolift.cnt);
+                break;
+            case GenDitecGOL4:
+                generated_protocol = subghz_txrx_gen_ditec_gol4_protocol(
+                    subghz->txrx,
+                    subghz->gen_info->mod,
+                    subghz->gen_info->freq,
+                    subghz->gen_info->ditec_gol4.serial,
+                    subghz->gen_info->ditec_gol4.btn,
+                    subghz->gen_info->ditec_gol4.cnt);
                 break;
             case GenNiceFlorS:
                 generated_protocol = subghz_txrx_gen_nice_flor_s_protocol(

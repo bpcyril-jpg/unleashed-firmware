@@ -57,7 +57,7 @@ bool subghz_protocol_keeloq_create_data(
  * @param preset Modulation, SubGhzRadioPreset
  * @return true On success
  */
-bool subghz_protocol_keeloq_bft_create_data(
+bool subghz_protocol_keeloq_seed_create_data(
     void* context,
     FlipperFormat* flipper_format,
     uint32_t serial,
@@ -242,6 +242,24 @@ bool subghz_protocol_beninca_arc_create_data(
  * @return true On success
  */
 bool subghz_protocol_jarolift_create_data(
+    void* context,
+    FlipperFormat* flipper_format,
+    uint32_t serial,
+    uint8_t btn,
+    uint16_t cnt,
+    SubGhzRadioPreset* preset);
+
+/**
+ * Key generation from simple data.
+ * @param context Pointer to a SubGhzProtocolEncoderDitecGOL4 instance
+ * @param flipper_format Pointer to a FlipperFormat instance
+ * @param serial Serial number
+ * @param btn Button number, 8 bit
+ * @param cnt Counter value, 16 bit
+ * @param preset Modulation, SubGhzRadioPreset
+ * @return true On success
+ */
+bool subghz_protocol_ditec_gol4_create_data(
     void* context,
     FlipperFormat* flipper_format,
     uint32_t serial,

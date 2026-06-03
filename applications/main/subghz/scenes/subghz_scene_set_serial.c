@@ -30,9 +30,9 @@ void subghz_scene_set_serial_on_enter(void* context) {
         byte_ptr = (uint8_t*)&subghz->gen_info->came_atomo.serial;
         byte_count = sizeof(subghz->gen_info->came_atomo.serial);
         break;
-    case GenKeeloqBFT:
-        byte_ptr = (uint8_t*)&subghz->gen_info->keeloq_bft.serial;
-        byte_count = sizeof(subghz->gen_info->keeloq_bft.serial);
+    case GenKeeloqSeed:
+        byte_ptr = (uint8_t*)&subghz->gen_info->keeloq_seed.serial;
+        byte_count = sizeof(subghz->gen_info->keeloq_seed.serial);
         break;
     case GenAlutechAt4n:
         byte_ptr = (uint8_t*)&subghz->gen_info->alutech_at_4n.serial;
@@ -57,6 +57,10 @@ void subghz_scene_set_serial_on_enter(void* context) {
     case GenJarolift:
         byte_ptr = (uint8_t*)&subghz->gen_info->jarolift.serial;
         byte_count = sizeof(subghz->gen_info->jarolift.serial);
+        break;
+    case GenDitecGOL4:
+        byte_ptr = (uint8_t*)&subghz->gen_info->ditec_gol4.serial;
+        byte_count = sizeof(subghz->gen_info->ditec_gol4.serial);
         break;
     case GenNiceFlorS:
         byte_ptr = (uint8_t*)&subghz->gen_info->nice_flor_s.serial;
@@ -114,9 +118,9 @@ bool subghz_scene_set_serial_on_event(void* context, SceneManagerEvent event) {
                 subghz->gen_info->came_atomo.serial =
                     __bswap32(subghz->gen_info->came_atomo.serial);
                 break;
-            case GenKeeloqBFT:
-                subghz->gen_info->keeloq_bft.serial =
-                    __bswap32(subghz->gen_info->keeloq_bft.serial);
+            case GenKeeloqSeed:
+                subghz->gen_info->keeloq_seed.serial =
+                    __bswap32(subghz->gen_info->keeloq_seed.serial);
                 break;
             case GenAlutechAt4n:
                 subghz->gen_info->alutech_at_4n.serial =
@@ -136,6 +140,10 @@ bool subghz_scene_set_serial_on_event(void* context, SceneManagerEvent event) {
                 break;
             case GenJarolift:
                 subghz->gen_info->jarolift.serial = __bswap32(subghz->gen_info->jarolift.serial);
+                break;
+            case GenDitecGOL4:
+                subghz->gen_info->ditec_gol4.serial =
+                    __bswap32(subghz->gen_info->ditec_gol4.serial);
                 break;
             case GenBenincaARC:
                 subghz->gen_info->beninca_arc.serial =
@@ -164,13 +172,14 @@ bool subghz_scene_set_serial_on_event(void* context, SceneManagerEvent event) {
             switch(subghz->gen_info->type) {
             case GenFaacSLH:
             case GenKeeloq:
-            case GenKeeloqBFT:
+            case GenKeeloqSeed:
             case GenAlutechAt4n:
             case GenSomfyTelis:
             case GenSomfyKeytis:
             case GenKingGatesStylo4k:
             case GenBenincaARC:
             case GenJarolift:
+            case GenDitecGOL4:
             case GenNiceFlorS:
             case GenSecPlus2:
                 scene_manager_next_scene(subghz->scene_manager, SubGhzSceneSetButton);
